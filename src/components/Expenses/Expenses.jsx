@@ -7,6 +7,7 @@ import Card from '../UI/Card';
 const Expenses = (props) => {
   const { data } = props;
 
+  // algseisund on 2023
   const [filteredYear, setFilteredYear] = useState('2023');
 
   const filterChangeHandler = (selectedYear) => {
@@ -14,10 +15,12 @@ const Expenses = (props) => {
     console.log("Valitud aasta on:", selectedYear);
   };
 
+  // filter funktisooni kasutamine
   const filteredExpenses = data.filter((expense) => {
     return expense.date.getFullYear().toString() === filteredYear;
   });
 
+// map funktsiooni kasutamine 
   return (
     <Card className="expenses">
       <ExpensesFilter
