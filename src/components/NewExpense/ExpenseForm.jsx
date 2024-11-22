@@ -9,7 +9,6 @@ const ExpenseForm = (props) => {
     enteredDate: '',
   });
 
-  console.log(userInput)
 
   const titleChangeHandler = (event) => {
     setuserInput({
@@ -40,6 +39,9 @@ const ExpenseForm = (props) => {
         date: new Date(userInput.enteredDate)
     };
     console.log(expenseData)
+
+    props.onSaveExpenseData(expenseData)
+
     setuserInput({
         enteredTitle: "",
         enteredPrice: "",
@@ -66,6 +68,7 @@ const ExpenseForm = (props) => {
             min="0.01"
             step="0.01"
             onChange={priceChangeHandler}
+            value={userInput.enteredPrice}
           />
         </div>
         <div className="new-expense__control">
@@ -75,6 +78,7 @@ const ExpenseForm = (props) => {
             min="2024-11-12"
             max="2026-01-31"
             onChange={dateChangeHandler}
+            value={userInput.enteredDate}
           />
         </div>
       </div>
