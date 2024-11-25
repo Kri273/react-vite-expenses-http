@@ -5,13 +5,7 @@ import { useState } from "react";
 
 const ExpenseItem = (props) => {
   const { date, price, title: initialTitle } = props;
-  const [title, setTitle] = useState(initialTitle);
-
-  const clickHandler = () => {
-    console.log("clicked");
-    setTitle(`Updated by click ${title}`);
-    console.log(title);
-  };
+  const [title] = useState(initialTitle);
 
   return (
     <li>
@@ -21,7 +15,6 @@ const ExpenseItem = (props) => {
           <h2>{title}</h2>
           <div className="expense-item__price">{price}</div>
         </div>
-        <button onClick={clickHandler}>Click Me</button>
       </Card>
     </li>
   );
