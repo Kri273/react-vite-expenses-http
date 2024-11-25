@@ -8,13 +8,11 @@ const NewExpense = (props) => {
 
   const startEditingHandler = () => {
     setEditForm(true);
-    console.log('form edit open')
 
   };
 
   const stopEditingHandler = () => {
     setEditForm(false);
-    console.log('form edit close')
   };
 
   const saveExpenseDataHandler = (enteredExpenseData) => {
@@ -24,8 +22,6 @@ const NewExpense = (props) => {
     };
     props.onAddExpense(expenseData); 
     setEditForm(false);
-    console.log('form edit close after submit')
-
   };
 
   return (
