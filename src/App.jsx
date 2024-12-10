@@ -33,22 +33,47 @@ const App = () => {
     console.log(expenses);
   }, []);
 
+  const errorHandler = () => {
+    setError(null);
+    setShowError(false);
+  };
 
   const addExpenseHandler = (expense) => {
-    setExpenses((previousExpenses) => {
-      return [expense, ...previousExpenses];
-    });
+
+    const addExpense = async (expense) => {
+      try {
+        const response = await fetch("http://localhost:3005/add-expense", {
+          method: "POST",
+          body: JSON.stringify(expense),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const responseData = await response.json();
+        if (!response.ok) {
+          throw new Error("Failed saving data");
+        }
+        setExpenses([expense, ...expenses]);
+      } catch (error) {
+        setError({
+          title: "An error occured!",
+          message: "Failed saving expenses data, please try again.",
+        });
+        setShowError(true);
+      }
+    };
+    addExpense(expense);
   };
 
   return (
     <div className="App">
       {showError && (
         <Error
-        title={error.title}
-        message={error.message}
-        onConfirm={errorHandler}
-        />)
-      }
+          title={error.title}
+          message={error.message}
+          onConfirm={errorHandler}
+        />
+      )}
       <NewExpense onAddExpense={addExpenseHandler} />
       <Expenses data={expenses} isLoading={isFetching} />
     </div>
